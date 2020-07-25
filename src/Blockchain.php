@@ -12,7 +12,7 @@ class Blockchain{
             'timestamp' => time(),
             'transactions' =>'',//一般带上数字签名  公钥 以及交易信息等,  采用非对称加密技术 私钥加密交易数据得到签名 公钥解密签名获得交易数据 
             'proof' => 100,
-            'prevBlockHash' => '0000000000000000000000000000000000000000000000000000000000000000',//参考BTC的第一个创世块
+            'preBlockHash' => '0000000000000000000000000000000000000000000000000000000000000000',//参考BTC的第一个创世块
         ];
         $block['hash'] = $this->blockHash($block);
         $this->chain = [$block];
@@ -26,7 +26,7 @@ class Blockchain{
             'timestamp' => $block['timestamp'],
             'transactions' =>  $block['transactions'],
             'proof'        => $block['proof'],
-            'prevBlockHash' => $block['prevBlockHash'],
+            'preBlockHash' => $block['preBlockHash'],
         ];
         $blockString = json_encode($blockArray);
         return hash('sha256',$blockString);
@@ -46,7 +46,7 @@ class Blockchain{
             'timestamp'    => time(),
             'transactions' => $transactions,
             'proof'        => $proof,
-            'prevBlockHash' => $preBlockInfo['hash'],
+            'preBlockHash' => $preBlockInfo['hash'],
             'hash'         => ''
         ];
         $block['hash'] = $this->getHash($block);
